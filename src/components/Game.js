@@ -5,6 +5,10 @@ const Game = ({ score, myChoice, setScore }) => {
   const [house, setHouse] = useState("");
   const [playerWin, setPlayerWin] = useState("");
 
+  myChoice = myChoice.name
+
+  console.log("fucking myChoice",myChoice)
+
   const [counter, setCounter] = useState(3);
 
   const newHousePick = () => {

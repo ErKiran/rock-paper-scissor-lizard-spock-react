@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import { Switch, Route } from "react-router-dom";
 
 function App() {
-  const [myChoice, setMyChoice] = useState("");
+  const [myChoice, setMyChoice] = useState({});
   const [score, setScore] = useState(0);
 
   return (
