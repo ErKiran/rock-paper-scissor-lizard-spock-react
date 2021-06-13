@@ -20,43 +20,19 @@ const Play = ({ setMyChoice }) => {
 
   return (
     <div className="play">
-      {console.log(allChoices)}
       <img src={Pentagon} alt="" className="triangle" />
       <div className="items">
         <Link to="/game">
-          <div
-            data-id="paper"
-            onClick={setChoice}
-            className="icon icon--paper"
-          ></div>
-        </Link>
-        <Link to="/game">
-          <div
-            data-id="scissors"
-            onClick={setChoice}
-            className="icon icon--scissors"
-          ></div>
-        </Link>
-        <Link to="/game">
-          <div
-            data-id="rock"
-            onClick={setChoice}
-            className="icon icon--rock"
-          ></div>
-        </Link>
-        <Link to="/game">
-          <div
-            data-id="lizard"
-            onClick={setChoice}
-            className="icon icon--lizard"
-          ></div>
-        </Link>
-        <Link to="/game">
-          <div
-            data-id="spock"
-            onClick={setChoice}
-            className="icon icon--spock"
-          ></div>
+          {allChoices.map(i => {
+            return (
+              <div
+                key={i.id}
+                data-id={`${i.name}`}
+                onClick={setChoice}
+                className={`icon icon--${i.name}`}
+              ></div>
+            )
+          })}
         </Link>
       </div>
     </div>
