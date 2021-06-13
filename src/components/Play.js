@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Triangle from "../images/bg-triangle.svg";
+import Pentagon from "../images/bg-pentagon.svg";
 
 const Play = ({ setMyChoice }) => {
   const setChoice = (e) => {
@@ -9,7 +9,7 @@ const Play = ({ setMyChoice }) => {
 
   return (
     <div className="play">
-      <img src={Triangle} alt="" className="triangle" />
+      <img src={Pentagon} alt="" className="triangle" />
       <div className="items">
         <Link to="/game">
           <div
@@ -30,6 +30,20 @@ const Play = ({ setMyChoice }) => {
             data-id="rock"
             onClick={setChoice}
             className="icon icon--rock"
+          ></div>
+        </Link>
+        <Link to="/game">
+          <div
+            data-id="lizard"
+            onClick={setChoice}
+            className="icon icon--lizard"
+          ></div>
+        </Link>
+        <Link to="/game">
+          <div
+            data-id="spock"
+            onClick={setChoice}
+            className="icon icon--spock"
           ></div>
         </Link>
       </div>
