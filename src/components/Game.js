@@ -104,16 +104,3 @@ const Game = ({ score, myChoice, setScore }) => {
 };
 
 export default Game;
-
-/*
- my choice:{myChoice} <br />
-      House choice:{house} <br />
-      Result:
-      {playerWin == "win" && <h2>You Win</h2>}
-      {playerWin == "lose" && <h2>You lose</h2>}
-      {playerWin == "draw" && <h2>Draw</h2>}
-      <Link to="/" onClick={() => setHouse()}>
-        Play Again
-      </Link>
-
-*/
