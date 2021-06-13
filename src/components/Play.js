@@ -7,8 +7,8 @@ import { choices } from "../services/game.service";
 const Play = ({ setMyChoice }) => {
   const [allChoices, setAllChoices] = useState([])
   const setChoice = (e) => {
-    console.log("fucking e",e.target)
-    const id = allChoices.filter(i=> i.name ===e.target.dataset.id)[0].id
+    console.log("fucking e", e.target)
+    const id = allChoices.filter(i => i.name === e.target.dataset.id)[0].id
     setMyChoice({
       name: e.target.dataset.id,
       id
@@ -26,8 +26,8 @@ const Play = ({ setMyChoice }) => {
   return (
     <div className="play">
       <img src={Pentagon} alt="" className="triangle" />
-      <div className="items">
-        <Link to="/game">
+      <Link to="/game">
+        <div className="items">
           {allChoices.map(i => {
             return (
               <div
@@ -37,9 +37,10 @@ const Play = ({ setMyChoice }) => {
                 className={`icon icon--${i.name}`}
               ></div>
             )
+
           })}
-        </Link>
-      </div>
+        </div>
+      </Link>
     </div>
   );
 }

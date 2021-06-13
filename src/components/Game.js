@@ -18,11 +18,11 @@ const Game = ({ score, myChoice, setScore }) => {
   }, []);
 
   const Result = () => {
-    {console.log("gameResult",gameResult)}
-    if(gameResult.result === "win"){
+    { console.log("gameResult", gameResult) }
+    if (gameResult.result === "win") {
       setScore(score + 1)
     }
-    if(gameResult.result === "lose"){
+    if (gameResult.result === "lose") {
       setScore(score - 1)
     }
   };
@@ -44,10 +44,11 @@ const Game = ({ score, myChoice, setScore }) => {
     <div className="game">
       <div className="game__you">
         <span className="text">You Picked</span>
-        <div
-          className={`icon icon--${name} ${gameResult.result == "win" ? `icon icon--${name}--winner` : ""
-            }`}
-        ></div>
+        {counter == 0 ?(
+          <div
+            className={`icon icon--${name} ${gameResult.result == "win" ? `icon icon--${name}--winner` : ""
+              }`}
+          ></div>):(<div className={`icon icon--${name}`}></div>)}
       </div>
       {counter == 0 && gameResult.result == "win" && (
         <div className="game__play">
@@ -65,7 +66,7 @@ const Game = ({ score, myChoice, setScore }) => {
           </Link>
         </div>
       )}
-      {counter ==0 && gameResult.result == "tie" && (
+      {counter == 0 && gameResult.result == "tie" && (
         <div className="game__play">
           <span className="text">Tie</span>
           <Link to="/" className="play-again">
