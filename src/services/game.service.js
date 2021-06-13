@@ -6,19 +6,10 @@ export const choices = async () => {
     return axios.get(`${API_URL}/choices`)
 }
 
-export const getScriptDetails = async (id) => {
-    return axios.get(`${API_URL}/stock/${id}`)
-}
 
-export const addStockWatch = async (script, desiredPrice, desiredPercentageChange, change) => {
-    return axios.post(`${API_URL}/stock`, {
-        script,
-        desiredPrice,
-        desiredPercentageChange,
-        change,
+export const play = async (id) => {
+    return axios.post(`${API_URL}/play`, {
+        player: id
     })
 }
 
-export const getStockWatchOfUser = async()=>{
-    return axios.get(`${API_URL}/stocks`)
-}

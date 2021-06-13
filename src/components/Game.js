@@ -1,45 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { play } from "../services/game.service";
 
 const Game = ({ score, myChoice, setScore }) => {
-  const [house, setHouse] = useState("");
-  const [playerWin, setPlayerWin] = useState("");
+  const [gameResult, setGameResult] = useState({});
 
-  myChoice = myChoice.name
-
-  console.log("fucking myChoice",myChoice)
+  const { id, name } = myChoice
 
   const [counter, setCounter] = useState(3);
 
-  const newHousePick = () => {
-    const choices = ["rock", "paper", "scissors"];
-    setHouse(choices[Math.floor(Math.random() * 3)]);
-  };
   useEffect(() => {
-    newHousePick();
+    async function startGame() {
+      const result = await play(id)
+      setGameResult(result.data)
+    }
+    startGame()
   }, []);
 
   const Result = () => {
-    if (myChoice === "rock" && house === "scissors") {
-      setPlayerWin("win");
-      setScore(score + 1);
-    } else if (myChoice === "rock" && house === "paper") {
-      setPlayerWin("lose");
-      setScore(score - 1);
-    } else if (myChoice === "scissors" && house === "paper") {
-      setPlayerWin("win");
-      setScore(score + 1);
-    } else if (myChoice === "scissors" && house === "rock") {
-      setPlayerWin("lose");
-      setScore(score - 1);
-    } else if (myChoice === "paper" && house === "rock") {
-      setPlayerWin("win");
-      setScore(score + 1);
-    } else if (myChoice === "paper" && house === "scissors") {
-      setPlayerWin("lose");
-      setScore(score - 1);
-    } else {
-      setPlayerWin("draw");
+    {console.log("gameResult",gameResult)}
+    if(gameResult.result === "win"){
+      setScore(score + 1)
+    }
+    if(gameResult.result === "lose"){
+      setScore(score - 1)
     }
   };
 
@@ -47,45 +31,44 @@ const Game = ({ score, myChoice, setScore }) => {
     const timer =
       counter > 0
         ? setInterval(() => {
-            setCounter(counter - 1);
-          }, 1000)
+          setCounter(counter - 1);
+        }, 1000)
         : Result();
 
     return () => {
       clearInterval(timer);
     };
-  }, [counter, house]);
+  }, [counter]);
 
   return (
     <div className="game">
       <div className="game__you">
         <span className="text">You Picked</span>
         <div
-          className={`icon icon--${myChoice} ${
-            playerWin == "win" ? `icon icon--${myChoice}--winner` : ""
-          }`}
+          className={`icon icon--${name} ${gameResult.result == "win" ? `icon icon--${name}--winner` : ""
+            }`}
         ></div>
       </div>
-      {playerWin == "win" && (
+      {counter == 0 && gameResult.result == "win" && (
         <div className="game__play">
           <span className="text">You Win</span>
-          <Link to="/" className="play-again" onClick={() => setHouse()}>
+          <Link to="/" className="play-again">
             Play Again
           </Link>
         </div>
       )}
-      {playerWin == "lose" && (
+      {counter == 0 && gameResult.result == "lose" && (
         <div className="game__play">
           <span className="text">You Lose</span>
-          <Link to="/" className="play-again" onClick={() => setHouse()}>
+          <Link to="/" className="play-again">
             Play Again
           </Link>
         </div>
       )}
-      {playerWin == "draw" && (
+      {counter ==0 && gameResult.result == "tie" && (
         <div className="game__play">
-          <span className="text">Draw</span>
-          <Link to="/" className="play-again" onClick={() => setHouse()}>
+          <span className="text">Tie</span>
+          <Link to="/" className="play-again">
             Play Again
           </Link>
         </div>
@@ -95,9 +78,8 @@ const Game = ({ score, myChoice, setScore }) => {
         <span className="text">The House Picked</span>
         {counter == 0 ? (
           <div
-            className={`icon icon--${house} ${
-              playerWin == "lose" ? `icon icon--${house}--winner` : ""
-            }`}
+            className={`icon icon--${gameResult.computerChoice} ${gameResult.result == "lose" ? `icon icon--${gameResult.computerChoice}--winner` : ""
+              }`}
           ></div>
         ) : (
           <div className="counter">{counter}</div>
