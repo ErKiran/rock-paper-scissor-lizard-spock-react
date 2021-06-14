@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { play } from "../services/game.service";
 
-const Game = ({ score, myChoice, setScore }) => {
+const Game = ({ score, myChoice, setScore, setGame, game }) => {
   const [gameResult, setGameResult] = useState({});
 
   const { id, name } = myChoice
@@ -18,7 +18,7 @@ const Game = ({ score, myChoice, setScore }) => {
   }, []);
 
   const Result = () => {
-    { console.log("gameResult", gameResult) }
+    setGame(game + 1)
     if (gameResult.result === "win") {
       setScore(score + 1)
     }
@@ -44,11 +44,11 @@ const Game = ({ score, myChoice, setScore }) => {
     <div className="game">
       <div className="game__you">
         <span className="text">You Picked</span>
-        {counter == 0 ?(
+        {counter == 0 ? (
           <div
             className={`icon icon--${name} ${gameResult.result == "win" ? `icon icon--${name}--winner` : ""
               }`}
-          ></div>):(<div className={`icon icon--${name}`}></div>)}
+          ></div>) : (<div className={`icon icon--${name}`}></div>)}
       </div>
       {counter == 0 && gameResult.result == "win" && (
         <div className="game__play">

@@ -7,7 +7,6 @@ import { choices } from "../services/game.service";
 const Play = ({ setMyChoice }) => {
   const [allChoices, setAllChoices] = useState([])
   const setChoice = (e) => {
-    console.log("fucking e", e.target)
     const id = allChoices.filter(i => i.name === e.target.dataset.id)[0].id
     setMyChoice({
       name: e.target.dataset.id,
